@@ -21,7 +21,7 @@
             <button class="btn btn-primary" :disabled="newItem.length === 0" @click="saveItem">Save</button>
         </div>
         <ul>
-            <li v-for="item in items">{{item}}</li>
+            <li v-for="item in items" :class="{strikeout: item.purchased}">{{item.label}}</li>
         </ul>
         <p v-if="items.length === 0">Nice job!</p>
     </div>
@@ -35,14 +35,26 @@
                 header: 'Shopping List App',
                 newItem: '',
                 items: [
-                    '10 party hats',
-                    '2 board games',
-                    '3 apples',
+                    {
+                        label: '10 party hats',
+                        purchased: false,
+                    },
+                    {
+                        label: '2 board games',
+                        purchased: true,
+                    },
+                    {
+                        label: '3 apples',
+                        purchased: false,
+                    },
                 ]
             },
             methods: {
                 saveItem: function () {
-                    this.items.push(this.newItem);
+                    this.items.push({
+                        label: this.newItem,
+                        purchased: false,
+                    });
                     this.newItem = '';
                 },
                 changeState: function (newstate) {
