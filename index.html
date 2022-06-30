@@ -11,7 +11,8 @@
 <body>
     <div id="shopping-list">
         <h1>{{ header.toLocaleUpperCase() }}</h1>
-        <input v-model="newItem" type="text" placeholder="Add an item">
+        <input v-model="newItem" type="text" placeholder="Add an item" @keyup.enter="items.push(newItem)">
+        <button class="btn btn-primary" @click="items.push(newItem)">Save</button>
         <ul>
             <li v-for="item in items">{{item}}</li>
         </ul>
